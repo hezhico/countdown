@@ -1,0 +1,447 @@
+.page {
+  min-height: 100vh;
+  background: var(--bg-page);
+  display: flex;
+  flex-direction: column;
+}
+
+/* 顶部标题区 */
+.header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-lighter));
+  padding: 0 24rpx 20rpx;
+}
+.header-content {
+  display: flex;
+  align-items: center;
+}
+.header-title {
+  display: flex;
+  flex-direction: column;
+}
+.title-text {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #fff;
+}
+.title-sub {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 4rpx;
+}
+
+/* 模式分段控件 */
+.seg {
+  display: flex;
+  flex-direction: row;
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 40rpx;
+  padding: 6rpx;
+  margin-top: 16rpx;
+}
+.seg-item {
+  flex: 1;
+  text-align: center;
+  padding: 14rpx 0;
+  border-radius: 34rpx;
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.9);
+  transition: all 0.15s ease;
+}
+.seg-active {
+  background: #fff;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* 分类标签（复用诗词风格） */
+.cat-scroll {
+  background: var(--bg-page);
+  white-space: nowrap;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.04);
+}
+.cat-list {
+  display: inline-flex;
+  flex-direction: row;
+  padding: 20rpx 24rpx 12rpx;
+  gap: 16rpx;
+}
+.cat-item {
+  padding: 12rpx 28rpx;
+  border-radius: 30rpx;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+}
+.cat-active {
+  background: var(--primary);
+}
+.cat-text {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+}
+.cat-active .cat-text {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* 搜索栏 */
+.search-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 20rpx 24rpx 8rpx;
+  padding: 14rpx 24rpx;
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+.search-icon {
+  font-size: 28rpx;
+  margin-right: 12rpx;
+}
+.search-input {
+  flex: 1;
+  font-size: 28rpx;
+  color: var(--text-primary);
+}
+.search-ph {
+  color: var(--text-hint);
+}
+
+/* 字词列表 */
+.list-scroll {
+  flex: 1;
+  padding: 12rpx 24rpx 0;
+}
+.hanzi-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 24rpx;
+  margin-bottom: 18rpx;
+}
+.hanzi-char {
+  font-size: 56rpx;
+  font-weight: 700;
+  color: var(--text-primary);
+  width: 96rpx;
+  text-align: center;
+}
+.hanzi-meta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 16rpx;
+}
+.hanzi-pinyin {
+  font-size: 30rpx;
+  color: var(--primary);
+  font-weight: 600;
+}
+.hanzi-meaning {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  margin-top: 6rpx;
+}
+.hanzi-arrow {
+  font-size: 40rpx;
+  color: var(--text-hint);
+}
+
+/* 空状态 */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80rpx 0;
+}
+.empty-icon {
+  font-size: 64rpx;
+}
+.empty-text {
+  font-size: 28rpx;
+  color: var(--text-hint);
+  margin-top: 16rpx;
+}
+
+/* 浏览详情底部弹层 */
+.detail-mask {
+  position: fixed;
+  left: 0; right: 0; top: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: flex-end;
+  z-index: 50;
+}
+.detail-sheet {
+  width: 100%;
+  background: var(--bg-card);
+  border-radius: 32rpx 32rpx 0 0;
+  padding: 40rpx 40rpx 48rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.detail-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.detail-char {
+  font-size: 120rpx;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.detail-pinyin {
+  font-size: 44rpx;
+  color: var(--primary);
+  font-weight: 600;
+  margin-top: 8rpx;
+}
+.detail-tone {
+  font-size: 24rpx;
+  color: var(--text-hint);
+  margin-top: 8rpx;
+}
+.detail-info {
+  display: flex;
+  flex-direction: row;
+  gap: 16rpx;
+  margin-top: 16rpx;
+}
+.info-chip {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+  background: rgba(0, 0, 0, 0.04);
+  padding: 8rpx 22rpx;
+  border-radius: 24rpx;
+}
+.detail-meaning {
+  font-size: 30rpx;
+  color: var(--text-secondary);
+  margin-top: 28rpx;
+  text-align: center;
+}
+.detail-words {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16rpx;
+  margin-top: 24rpx;
+}
+.word-chip {
+  font-size: 28rpx;
+  color: var(--primary);
+  background: rgba(224, 123, 76, 0.1);
+  padding: 10rpx 24rpx;
+  border-radius: 30rpx;
+}
+.detail-close {
+  margin-top: 40rpx;
+  padding: 18rpx 64rpx;
+  border-radius: 40rpx;
+  background: var(--primary);
+}
+.detail-close text {
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+/* ==== 卡片模式 ==== */
+.card-stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40rpx 24rpx;
+}
+.flip-card {
+  width: 520rpx;
+  height: 640rpx;
+  perspective: 1400rpx;
+}
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.25s ease;
+  transform-style: preserve-3d;
+}
+.flip-inner.flipped {
+  transform: rotateY(180deg);
+}
+.flip-front, .flip-back {
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+}
+.flip-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(135deg, #FAF3EC, #F2E5D7);
+}
+.flip-char {
+  font-size: 200rpx;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.flip-hint {
+  font-size: 26rpx;
+  color: var(--text-hint);
+  margin-top: 24rpx;
+}
+.flip-pinyin {
+  font-size: 88rpx;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.flip-meaning {
+  font-size: 32rpx;
+  color: var(--text-secondary);
+  margin-top: 28rpx;
+  padding: 0 40rpx;
+  text-align: center;
+}
+.card-progress {
+  text-align: center;
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  margin: 8rpx 0 16rpx;
+}
+.card-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 20rpx;
+  padding: 0 48rpx 24rpx;
+}
+.cap-btn {
+  flex: 1;
+  text-align: center;
+  padding: 22rpx 0;
+  border-radius: 40rpx;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+  font-size: 30rpx;
+  color: var(--text-primary);
+}
+.cap-btn:active { opacity: 0.7; }
+.cap-primary {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ==== 测验模式 ==== */
+.quiz-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 28rpx 40rpx 8rpx;
+}
+.quiz-score {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--primary);
+}
+.quiz-progress {
+  font-size: 30rpx;
+  color: var(--text-secondary);
+}
+.quiz-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40rpx 0 16rpx;
+}
+.quiz-char {
+  font-size: 200rpx;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.quiz-tip {
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  margin-top: 16rpx;
+}
+.quiz-options {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 24rpx;
+  padding: 24rpx 40rpx;
+}
+.quiz-opt {
+  flex: 0 0 calc(50% - 13rpx);
+  box-sizing: border-box;
+  text-align: center;
+  padding: 44rpx 0;
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+  transition: all 0.15s ease;
+}
+.quiz-opt:active { opacity: 0.7; }
+.quiz-opt-text {
+  font-size: 48rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.opt-correct {
+  background: var(--color-success);
+}
+.opt-correct .quiz-opt-text {
+  color: #fff;
+}
+.opt-wrong {
+  background: var(--color-danger);
+}
+.opt-wrong .quiz-opt-text {
+  color: #fff;
+}
+.quiz-feedback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16rpx 40rpx 0;
+}
+.quiz-feedback-text {
+  font-size: 32rpx;
+  font-weight: 600;
+}
+.quiz-msg {
+  font-size: 28rpx;
+  margin-top: 10rpx;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(-12rpx);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+.quiz-msg.show {
+  opacity: 0.92;
+  transform: translateY(0);
+}
+.fb-ok { color: var(--color-success); }
+.fb-no { color: var(--color-danger); }
+.quiz-next {
+  margin-top: 28rpx;
+  padding: 22rpx 80rpx;
+  border-radius: 40rpx;
+  background: var(--primary);
+}
+.quiz-next text {
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: 600;
+}

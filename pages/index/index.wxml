@@ -1,0 +1,44 @@
+<view class="page">
+  <!-- 顶部标题区 -->
+  <view class="header">
+    <view style="height: {{statusBarHeight}}px;"></view>
+    <view class="header-content" style="height: {{navBarHeight}}px;">
+      <view class="header-title">
+        <text class="title-text">百宝箱</text>
+        <text class="title-sub">把常用小工具收进一处</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能入口 -->
+  <view class="grid">
+    <view
+      class="feature-card"
+      wx:for="{{features}}"
+      wx:key="id"
+      data-url="{{item.url}}"
+      bindtap="onOpenFeature"
+    >
+      <view class="feature-icon" style="background: {{item.bg}};">
+        <text class="feature-emoji">{{item.icon}}</text>
+      </view>
+      <view class="feature-info">
+        <text class="feature-name">{{item.name}}</text>
+        <text class="feature-desc">{{item.desc}}</text>
+      </view>
+      <text class="feature-arrow">›</text>
+    </view>
+
+    <!-- 占位：更多功能即将上线 -->
+    <view class="feature-card feature-coming">
+      <view class="feature-icon feature-icon-more">
+        <text class="feature-emoji">＋</text>
+      </view>
+      <view class="feature-info">
+        <text class="feature-name">更多功能</text>
+        <text class="feature-desc">敬请期待</text>
+      </view>
+      <text class="feature-arrow">›</text>
+    </view>
+  </view>
+</view>

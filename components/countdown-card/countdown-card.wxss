@@ -1,0 +1,211 @@
+.card-wrapper {
+  position: relative;
+  margin-bottom: 20rpx;
+  overflow: hidden;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  min-height: 140rpx;
+  transition: transform 0.15s ease;
+}
+
+.card:active {
+  transform: scale(0.98);
+}
+
+.card-past {
+  opacity: 0.65;
+}
+
+.card-today {
+  box-shadow: 0 4rpx 32rpx rgba(255, 107, 53, 0.25);
+}
+
+/* 左侧色条 */
+.card-bar {
+  width: 8rpx;
+  min-height: 100%;
+  flex-shrink: 0;
+}
+
+/* 主内容 */
+.card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28rpx 28rpx 28rpx 24rpx;
+}
+
+/* 左侧信息 */
+.card-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.card-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.card-icon {
+  font-size: 36rpx;
+}
+
+.card-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* 置顶标识 */
+.pin-badge {
+  background: linear-gradient(135deg, #FF6B35, #FFA559);
+  padding: 2rpx 12rpx;
+  border-radius: 8rpx;
+  margin-left: 4rpx;
+}
+
+.pin-badge-text {
+  font-size: 20rpx;
+  color: #FFFFFF;
+  font-weight: 500;
+}
+
+/* 置顶卡片样式 */
+.card-pinned {
+  border: 2rpx solid rgba(255, 107, 53, 0.25);
+}
+
+/* 功能标签（每年/农历） */
+.tag-badge {
+  padding: 2rpx 12rpx;
+  border-radius: 8rpx;
+  margin-left: 4rpx;
+}
+
+.tag-badge-text {
+  font-size: 20rpx;
+  color: #FFFFFF;
+  font-weight: 500;
+}
+
+.tag-yearly {
+  background: linear-gradient(135deg, #FF6B35, #FFA559);
+}
+
+.tag-lunar {
+  background: linear-gradient(135deg, #13C2C2, #36CFC9);
+}
+
+/* 订阅铃铛图标 */
+.subscribe-icon {
+  margin-left: auto;
+  padding: 4rpx 8rpx;
+  border-radius: 50%;
+  opacity: 0.4;
+  transition: opacity 0.2s;
+}
+
+.subscribe-icon.subscribe-active {
+  opacity: 1;
+}
+
+.subscribe-icon-text {
+  font-size: 28rpx;
+}
+
+.card-date {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.date-text {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+}
+
+.week-text {
+  font-size: 22rpx;
+  color: var(--text-hint);
+  background: #F5F5F5;
+  padding: 2rpx 12rpx;
+  border-radius: 8rpx;
+}
+
+/* 右侧天数 */
+.card-days {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 4rpx;
+  flex-shrink: 0;
+  margin-left: 20rpx;
+}
+
+.days-num {
+  font-size: 64rpx;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.days-num-past {
+  color: var(--text-hint);
+  font-size: 52rpx;
+}
+
+.days-label {
+  font-size: 22rpx;
+  color: var(--primary-light);
+  font-weight: 500;
+}
+
+.days-label-past {
+  color: var(--text-hint);
+}
+
+.days-today {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: var(--primary);
+  background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+  padding: 8rpx 20rpx;
+  border-radius: var(--radius-sm);
+}
+
+/* 删除按钮 */
+.delete-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 140rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FF4D4F;
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+}
+
+.delete-text {
+  color: #FFFFFF;
+  font-size: 28rpx;
+  font-weight: 500;
+}

@@ -1,0 +1,359 @@
+.page {
+  min-height: 100vh;
+  background: var(--bg-page);
+  display: flex;
+  flex-direction: column;
+}
+
+/* 搜索栏中的“随机”按钮 */
+.random-btn {
+  flex-shrink: 0;
+  margin-left: 16rpx;
+  padding: 8rpx 24rpx;
+  border-radius: 30rpx;
+  background: rgba(255, 107, 53, 0.1);
+}
+
+.random-btn:active {
+  opacity: 0.7;
+}
+
+.random-btn-text {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #FF6B35;
+}
+
+/* 分类标签 */
+.cat-scroll {
+  background: var(--bg-page);
+  white-space: nowrap;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.04);
+}
+
+.cat-list {
+  display: inline-flex;
+  flex-direction: row;
+  padding: 20rpx 24rpx 12rpx;
+  gap: 16rpx;
+}
+
+.cat-item {
+  flex-shrink: 0;
+  padding: 12rpx 32rpx;
+  border-radius: 40rpx;
+  background: #FFFFFF;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.cat-text {
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.cat-active {
+  background: linear-gradient(135deg, #FF6B35, #FFA559);
+}
+
+.cat-active .cat-text {
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+/* 搜索栏 */
+.search-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 20rpx 32rpx 8rpx;
+  padding: 16rpx 24rpx;
+  background: #FFFFFF;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.search-icon {
+  font-size: 28rpx;
+  margin-right: 12rpx;
+}
+
+.search-input {
+  flex: 1;
+  font-size: 28rpx;
+  color: var(--text-primary);
+}
+
+.search-ph {
+  color: var(--text-hint);
+}
+
+/* 简/繁 切换 */
+.conv-toggle {
+  flex-shrink: 0;
+  margin-left: 16rpx;
+  padding: 8rpx 24rpx;
+  border-radius: 30rpx;
+  background: linear-gradient(135deg, #FF6B35, #FFA559);
+  box-shadow: 0 2rpx 10rpx rgba(255, 107, 53, 0.25);
+}
+
+.conv-toggle:active {
+  opacity: 0.85;
+}
+
+.conv-toggle-text {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+/* 列表 */
+.poem-scroll {
+  flex: 1;
+  padding: 16rpx 32rpx 0;
+}
+
+.poem-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28rpx 28rpx;
+  margin-bottom: 16rpx;
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.poem-item-main {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+  flex: 1;
+  min-width: 0;
+}
+
+.poem-item-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.poem-item-author {
+  font-size: 24rpx;
+  color: var(--text-hint);
+}
+
+.poem-item-arrow {
+  font-size: 40rpx;
+  color: var(--text-hint);
+  margin-left: 16rpx;
+}
+
+/* 空状态 */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 140rpx 0;
+  gap: 20rpx;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: var(--text-hint);
+}
+
+/* ======================================================
+   全屏沉浸式阅读器
+   ====================================================== */
+.reader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  animation: readerFade 0.25s ease-out both;
+}
+
+@keyframes readerFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* 主题 */
+.reader-theme-day   { background: #FBF7F0; color: #2D2D2D; }
+.reader-theme-eye   { background: #EDE3CC; color: #4A3F35; }
+.reader-theme-night { background: #16181C; color: #B9BCC4; }
+
+/* 正文区域顶部留出系统导航栏空间 */
+.reader-scroll {
+  flex: 1;
+  overflow: hidden;
+}
+
+.reader-content {
+  min-height: 100%;
+  box-sizing: border-box;
+  padding: 40rpx 56rpx 96rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.reader-title {
+  font-size: 1.5em;
+  font-weight: 700;
+  letter-spacing: 4rpx;
+  margin-bottom: 20rpx;
+  text-align: center;
+}
+
+.reader-author {
+  font-size: 0.8em;
+  opacity: 0.65;
+  margin-bottom: 48rpx;
+  letter-spacing: 2rpx;
+}
+
+.reader-prologue {
+  font-size: 0.78em;
+  line-height: 1.9;
+  opacity: 0.8;
+  background: rgba(128, 128, 128, 0.1);
+  border-radius: var(--radius-sm);
+  padding: 24rpx 28rpx;
+  margin-bottom: 40rpx;
+  text-align: justify;
+}
+
+.reader-lines {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.reader-line {
+  display: block;
+  font-size: 1em;
+  line-height: 2;
+  letter-spacing: 4rpx;
+  margin-bottom: 10rpx;
+  text-align: center;
+}
+
+/* 底部导航 */
+.reader-bottom {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18rpx 32rpx calc(18rpx + env(safe-area-inset-bottom));
+  border-top: 1rpx solid rgba(0, 0, 0, 0.06);
+}
+.reader-theme-eye .reader-bottom { border-color: rgba(74, 63, 53, 0.12); }
+.reader-theme-night .reader-bottom { border-color: rgba(255, 255, 255, 0.08); }
+
+.reader-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 28rpx;
+  color: inherit;
+  padding: 10rpx 8rpx;
+}
+
+.reader-nav-icon {
+  font-size: 40rpx;
+  line-height: 1;
+  margin-top: -2rpx;
+}
+
+.reader-center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 浮动设置按钮（扇形展开） */
+.reader-fab {
+  position: absolute;
+  right: 40rpx;
+  bottom: 240rpx;
+  z-index: 5;
+}
+
+.fab-main {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  background: rgba(128, 128, 128, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44rpx;
+  color: #FFFFFF;
+  box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease;
+  z-index: 2;
+}
+
+.fab-main.fab-active {
+  transform: rotate(45deg);
+}
+
+.fab-item {
+  position: absolute;
+  right: 16rpx;
+  bottom: 16rpx;
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background: rgba(128, 128, 128, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  opacity: 0;
+  transform: translate(0, 0) scale(0.3);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.fab-item.fab-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.fab-theme.fab-open {
+  transform: translate(-132rpx, 0) scale(1);
+}
+
+.fab-font.fab-open {
+  transform: translate(-94rpx, -94rpx) scale(1);
+}
+
+.reader-progress {
+  font-size: 26rpx;
+  opacity: 0.6;
+}

@@ -1,0 +1,87 @@
+<view class="page">
+  <!-- 顶部：应用名 + 设置入口 -->
+  <view class="toolbar">
+    <text class="app-name">上班摸鱼器</text>
+    <view class="setting-btn" bindtap="onOpenSetting">
+      <text class="setting-icon">⚙️</text>
+      <text class="setting-text">设置</text>
+    </view>
+  </view>
+
+  <!-- 已配置：主面板 -->
+  <view class="panel" wx:if="{{hasConfig}}">
+    <view class="block">
+      <text class="datetime">{{dateText}} {{weekdayText}} {{timeText}}</text>
+      <text class="status">{{statusText}}</text>
+      <text class="status-desc">{{statusDesc}}</text>
+    </view>
+
+    <view class="block">
+      <text class="label">今日已赚</text>
+      <text class="amount">{{earnedText}}</text>
+      <text class="speed">{{speedText}}</text>
+      <text class="reference">{{referenceText}}</text>
+    </view>
+
+    <view class="block">
+      <view class="progress-row">
+        <text class="label">今日工时进度</text>
+        <text class="progress-percent">{{progressText}}</text>
+      </view>
+      <view class="progress-track">
+        <view class="progress-bar" style="width: {{progressPercent}}%;"></view>
+      </view>
+      <text class="work-time">{{workTimeText}}</text>
+    </view>
+
+  </view>
+
+  <!-- 未配置：引导设置 -->
+  <view class="panel empty" wx:else>
+    <text class="empty-title">先设置月薪和上下班时间</text>
+    <text class="empty-desc">设置后就能看到今天已经赚了多少钱</text>
+    <view class="btn-dark" bindtap="onOpenSetting">去设置</view>
+  </view>
+
+  <!-- 设置面板 -->
+  <view class="mask" wx:if="{{showSetting}}" bindtap="onCloseSetting"></view>
+  <view class="setting-panel" wx:if="{{showSetting}}">
+    <text class="setting-title">设置</text>
+
+    <view class="field">
+      <text class="field-label">月薪（元）</text>
+      <input
+        class="field-input"
+        type="digit"
+        value="{{form.monthlySalary}}"
+        data-key="monthlySalary"
+        bindinput="onInput"
+        placeholder="例如 3000"
+      />
+    </view>
+
+    <view class="field">
+      <text class="field-label">上班时间</text>
+      <picker mode="time" value="{{form.workStart}}" bindchange="onStartChange">
+        <view class="field-picker">
+          <text class="field-picker-text">{{form.workStart == '' ? '点击选择' : form.workStart}}</text>
+          <text class="field-picker-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="field">
+      <text class="field-label">下班时间</text>
+      <picker mode="time" value="{{form.workEnd}}" bindchange="onEndChange">
+        <view class="field-picker">
+          <text class="field-picker-text">{{form.workEnd == '' ? '点击选择' : form.workEnd}}</text>
+          <text class="field-picker-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+
+    <text class="field-hint">时薪按 月薪 ÷ 21.75 个计薪日 ÷ 8 小时 换算</text>
+
+    <view class="btn-dark" bindtap="onSaveSetting">保存</view>
+  </view>
+</view>

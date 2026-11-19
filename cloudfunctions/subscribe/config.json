@@ -1,0 +1,9 @@
+{
+  "triggers": [
+    {
+      "name": "countdownNotify",
+      "type": "timer",
+      "config": "0 8 * * * * *"
+    }
+  ]
+}

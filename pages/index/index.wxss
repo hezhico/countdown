@@ -1,0 +1,106 @@
+.page {
+  min-height: 100vh;
+  background: var(--bg-page);
+  padding-bottom: 60rpx;
+}
+
+/* 顶部标题区：纯色扁平，不抢眼 */
+.header {
+  padding: 0 32rpx;
+  padding-top: 16rpx;
+  padding-bottom: 28rpx;
+  background: #FF6B35;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding-right: 180rpx;
+}
+
+.header-title {
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.title-text {
+  font-size: 42rpx;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 2rpx;
+}
+
+.title-sub {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* 功能入口 */
+.grid {
+  padding: 32rpx 32rpx 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.feature-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 32rpx;
+  background: var(--bg-card, #FFFFFF);
+  border-radius: 24rpx;
+  border: 1rpx solid rgba(0, 0, 0, 0.05);
+}
+
+.feature-icon {
+  width: 92rpx;
+  height: 92rpx;
+  border-radius: 22rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.feature-emoji {
+  font-size: 48rpx;
+  line-height: 1;
+}
+
+.feature-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+  margin-left: 28rpx;
+}
+
+.feature-name {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: var(--text-primary, #222);
+}
+
+.feature-desc {
+  font-size: 26rpx;
+  color: var(--text-hint, #999);
+}
+
+.feature-arrow {
+  font-size: 44rpx;
+  color: #CCCCCC;
+  margin-right: 8rpx;
+}
+
+/* 占位卡片 */
+.feature-coming {
+  opacity: 0.65;
+}
+
+.feature-icon-more {
+  background: #EDEDED;
+}

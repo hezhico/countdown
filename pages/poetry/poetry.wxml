@@ -1,0 +1,104 @@
+<view class="page">
+  <!-- 分类标签 -->
+  <scroll-view class="cat-scroll" scroll-x="true" enhanced="true" show-scrollbar="false">
+    <view class="cat-list">
+      <view
+        wx:for="{{categories}}"
+        wx:key="key"
+        class="cat-item {{activeKey === item.key ? 'cat-active' : ''}}"
+        data-key="{{item.key}}"
+        bindtap="onCategoryTap"
+      >
+        <text class="cat-text">{{item.name}}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <text class="search-icon">🔍</text>
+    <input
+      class="search-input"
+      placeholder="搜索标题或作者"
+      placeholder-class="search-ph"
+      value="{{keyword}}"
+      bindinput="onSearch"
+      confirm-type="search"
+    />
+    <view class="random-btn" bindtap="onRandom">
+      <text class="random-btn-text">随机</text>
+    </view>
+    <view class="conv-toggle" bindtap="onToggleConv">
+      <text class="conv-toggle-text">{{simplify ? '简' : '繁'}}</text>
+    </view>
+  </view>
+
+  <!-- 诗词列表 -->
+  <scroll-view class="poem-scroll" scroll-y="true">
+    <block wx:if="{{filtered.length > 0}}">
+      <view
+        class="poem-item"
+        wx:for="{{filtered}}"
+        wx:key="index"
+        data-index="{{index}}"
+        bindtap="onOpenDetail"
+      >
+        <view class="poem-item-main">
+          <text class="poem-item-title">{{item.title}}</text>
+          <text class="poem-item-author" wx:if="{{item.author}}">{{item.author}}</text>
+        </view>
+        <text class="poem-item-arrow">›</text>
+      </view>
+    </block>
+    <view wx:else class="empty">
+      <text class="empty-icon">📭</text>
+      <text class="empty-text">没有找到相关诗词</text>
+    </view>
+    <view class="safe-bottom"></view>
+  </scroll-view>
+
+  <!-- ============ 全屏沉浸式阅读器 ============ -->
+  <view
+    wx:if="{{showDetail}}"
+    class="reader reader-theme-{{theme}}"
+  >
+    <!-- 正文 -->
+    <scroll-view
+      class="reader-scroll"
+      scroll-y="true"
+      bindtouchstart="onReaderTouchStart"
+      bindtouchend="onReaderTouchEnd"
+    >
+      <view class="reader-content" style="font-size: {{fontSize}}rpx;">
+        <text class="reader-title">{{detail.title}}</text>
+        <text class="reader-author" wx:if="{{detail.author}}">{{detail.author}}</text>
+        <view class="reader-prologue" wx:if="{{detail.prologue}}">{{detail.prologue}}</view>
+        <view class="reader-lines">
+          <text class="reader-line" wx:for="{{detail.content}}" wx:key="index" wx:for-item="line">{{line}}</text>
+        </view>
+      </view>
+    </scroll-view>
+
+    <!-- 底部导航 -->
+    <view class="reader-bottom">
+      <view class="reader-nav" bindtap="onPrev">
+        <text class="reader-nav-icon">‹</text>
+        <text>上一首</text>
+      </view>
+      <view class="reader-center">
+        <text class="reader-progress">{{detailIndex + 1}} / {{filtered.length}}</text>
+      </view>
+      <view class="reader-nav" bindtap="onNext">
+        <text>下一首</text>
+        <text class="reader-nav-icon">›</text>
+      </view>
+    </view>
+
+    <!-- 浮动设置按钮（扇形展开） -->
+    <view class="reader-fab">
+      <view class="fab-item fab-theme {{showSettings ? 'fab-open' : ''}}" bindtap="onToggleTheme">{{theme === 'day' ? '🌞' : (theme === 'eye' ? '📜' : '🌙')}}</view>
+      <view class="fab-item fab-font {{showSettings ? 'fab-open' : ''}}" bindtap="onCycleFont">Aa</view>
+      <view class="fab-main {{showSettings ? 'fab-active' : ''}}" bindtap="onToggleSettings">⚙</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,171 @@
+<view class="page">
+  <!-- 表单区域 -->
+  <view class="form">
+    <!-- 事件名称 -->
+    <view class="form-group">
+      <text class="form-label">事件名称</text>
+      <view class="input-wrapper">
+        <input 
+          class="form-input"
+          placeholder="输入事件名称，如：高考、生日、纪念日"
+          placeholder-class="input-placeholder"
+          value="{{name}}"
+          bindinput="onNameInput"
+          maxlength="20"
+        />
+      </view>
+    </view>
+
+    <!-- 日期类型切换 -->
+    <view class="form-group">
+      <text class="form-label">日期类型</text>
+      <view class="segment-control">
+        <view 
+          class="segment-item {{dateType === 'solar' ? 'segment-active' : ''}}"
+          data-type="solar"
+          bindtap="onDateTypeChange"
+        >
+          <text class="segment-text">公历</text>
+        </view>
+        <view 
+          class="segment-item {{dateType === 'lunar' ? 'segment-active' : ''}}"
+          data-type="lunar"
+          bindtap="onDateTypeChange"
+        >
+          <text class="segment-text">农历</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 公历日期选择 -->
+    <view class="form-group" wx:if="{{dateType === 'solar'}}">
+      <text class="form-label">目标日期</text>
+      <picker 
+        mode="date" 
+        value="{{date}}" 
+        bindchange="onDateChange"
+      >
+        <view class="input-wrapper date-wrapper">
+          <text class="{{date ? 'date-value' : 'date-placeholder'}}">{{date || '选择日期'}}</text>
+          <text class="date-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+
+    <!-- 农历月日选择 -->
+    <view class="form-group" wx:if="{{dateType === 'lunar'}}">
+      <text class="form-label">农历日期</text>
+      <view class="lunar-picker-row">
+        <picker 
+          mode="selector" 
+          range="{{lunarMonthList}}" 
+          range-key="name"
+          value="{{lunarMonthIndex}}"
+          bindchange="onLunarMonthChange"
+        >
+          <view class="input-wrapper lunar-picker-item">
+            <text class="date-value">{{lunarMonthList[lunarMonthIndex].name || '选择月份'}}</text>
+            <text class="date-arrow">›</text>
+          </view>
+        </picker>
+        <picker 
+          mode="selector" 
+          range="{{lunarDayList}}"
+          value="{{lunarDayIndex}}"
+          bindchange="onLunarDayChange"
+        >
+          <view class="input-wrapper lunar-picker-item">
+            <text class="date-value">{{lunarDayList[lunarDayIndex] || '选择日期'}}</text>
+            <text class="date-arrow">›</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 每年重复开关 -->
+    <view class="form-group">
+      <view class="switch-row">
+        <view class="switch-info">
+          <text class="form-label" style="margin-bottom:0">每年重复</text>
+          <text class="switch-desc">生日、纪念日等每年循环的事件</text>
+        </view>
+        <switch 
+          class="repeat-switch"
+          checked="{{repeat === 'yearly'}}" 
+          bindchange="onRepeatChange"
+          color="#FF6B35"
+        />
+      </view>
+    </view>
+
+    <!-- 订阅提醒开关 -->
+    <view class="form-group">
+      <view class="switch-row">
+        <view class="switch-info">
+          <text class="form-label" style="margin-bottom:0">订阅提醒</text>
+          <text class="switch-desc">到期前通过微信消息提醒你</text>
+        </view>
+        <switch 
+          class="subscribe-switch"
+          checked="{{subscribed}}" 
+          bindchange="onSubscribeChange"
+          color="#13C2C2"
+        />
+      </view>
+      <view class="subscribe-tips" wx:if="{{subscribed}}">
+        <text class="subscribe-tip-text">将在提前7天、3天、1天和当天发送提醒</text>
+      </view>
+    </view>
+
+    <!-- 颜色选择 -->
+    <view class="form-group">
+      <text class="form-label">主题色</text>
+      <view class="color-list">
+        <view 
+          class="color-item {{color === item.value ? 'color-active' : ''}}"
+          wx:for="{{colors}}"
+          wx:key="value"
+          data-color="{{item.value}}"
+          bindtap="onColorSelect"
+        >
+          <view class="color-dot" style="background: {{item.value}};"></view>
+          <text class="color-label">{{item.label}}</text>
+          <view class="color-check" wx:if="{{color === item.value}}">✓</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 预览卡片 -->
+    <view class="form-group" wx:if="{{name && (date || (lunarMonth && lunarDay))}}">
+      <text class="form-label">预览效果</text>
+      <view class="preview-card">
+        <view class="preview-bar" style="background: {{color}};"></view>
+        <view class="preview-body">
+          <view class="preview-info">
+            <view class="preview-name-row">
+              <text class="preview-name">📌 {{name}}</text>
+              <view class="preview-badge" wx:if="{{repeat === 'yearly'}}">
+                <text class="preview-badge-text">每年</text>
+              </view>
+              <view class="preview-badge preview-badge-lunar" wx:if="{{dateType === 'lunar'}}">
+                <text class="preview-badge-text">农历</text>
+              </view>
+            </view>
+            <text class="preview-date">{{dateType === 'lunar' ? (lunarMonthList[lunarMonthIndex].name || '') + (lunarDayList[lunarDayIndex] || '') : date}}</text>
+          </view>
+          <view class="preview-days">
+            <text class="preview-days-num" style="color: {{color}};">{{previewDays || '--'}}</text>
+            <text class="preview-days-label">天后</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 保存按钮 -->
+  <view class="save-area safe-bottom">
+    <view class="save-btn {{canSave ? '' : 'save-btn-disabled'}}" bindtap="{{canSave ? 'onSave' : ''}}">
+      <text class="save-btn-text">保存倒计时</text>
+    </view>
+  </view>
+</view>

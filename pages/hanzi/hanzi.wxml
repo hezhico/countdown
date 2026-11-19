@@ -1,0 +1,154 @@
+<view class="page">
+  <!-- 顶部标题区 -->
+  <view class="header">
+    <view style="height: {{statusBarHeight}}px;"></view>
+    <view class="header-content" style="height: {{navBarHeight}}px;">
+      <view class="header-title">
+        <text class="title-text">汉字拼音</text>
+        <text class="title-sub">翻卡测验，轻松记拼音</text>
+      </view>
+    </view>
+    <!-- 模式分段控件 -->
+    <view class="seg">
+      <view class="seg-item {{mode === 'browse' ? 'seg-active' : ''}}" data-mode="browse" bindtap="onSwitchMode">
+        <text>浏览</text>
+      </view>
+      <view class="seg-item {{mode === 'card' ? 'seg-active' : ''}}" data-mode="card" bindtap="onSwitchMode">
+        <text>卡片</text>
+      </view>
+      <view class="seg-item {{mode === 'quiz' ? 'seg-active' : ''}}" data-mode="quiz" bindtap="onSwitchMode">
+        <text>测验</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- ============ 浏览模式 ============ -->
+  <block wx:if="{{mode === 'browse'}}">
+    <scroll-view class="cat-scroll" scroll-x="true" enhanced="true" show-scrollbar="false">
+      <view class="cat-list">
+        <view
+          wx:for="{{categories}}"
+          wx:key="key"
+          class="cat-item {{activeKey === item.key ? 'cat-active' : ''}}"
+          data-key="{{item.key}}"
+          bindtap="onCategoryTap"
+        >
+          <text class="cat-text">{{item.name}}</text>
+        </view>
+      </view>
+    </scroll-view>
+
+    <view class="search-bar">
+      <text class="search-icon">🔍</text>
+      <input
+        class="search-input"
+        placeholder="搜索汉字 / 拼音 / 释义"
+        placeholder-class="search-ph"
+        value="{{keyword}}"
+        bindinput="onSearch"
+        confirm-type="search"
+      />
+    </view>
+
+    <scroll-view class="list-scroll" scroll-y="true">
+      <view
+        class="hanzi-card"
+        wx:for="{{filtered}}"
+        wx:key="char"
+        data-index="{{index}}"
+        bindtap="openDetail"
+      >
+        <text class="hanzi-char">{{item.char}}</text>
+        <view class="hanzi-meta">
+          <text class="hanzi-pinyin">{{item.pinyin}}</text>
+          <text class="hanzi-meaning">{{item.meaning}}</text>
+        </view>
+        <text class="hanzi-arrow">›</text>
+      </view>
+      <view wx:if="{{filtered.length === 0}}" class="empty">
+        <text class="empty-icon">🔍</text>
+        <text class="empty-text">没有找到相关汉字</text>
+      </view>
+      <view class="safe-bottom"></view>
+    </scroll-view>
+
+    <!-- 浏览详情 -->
+    <view wx:if="{{showDetail}}" class="detail-mask" bindtap="closeDetail">
+      <view class="detail-sheet" catchtap="noop">
+        <view class="detail-head">
+          <text class="detail-char">{{detail.char}}</text>
+          <text class="detail-pinyin">{{detail.pinyin}}</text>
+          <text class="detail-tone">声调 {{detail.tone === 0 ? '轻声' : detail.tone}}</text>
+        </view>
+        <view class="detail-info">
+          <text class="info-chip">部首 {{detail.radicals}}</text>
+          <text class="info-chip">笔画 {{detail.strokes}}</text>
+        </view>
+        <view class="detail-meaning">{{detail.meaning}}</view>
+        <view class="detail-words">
+          <text class="word-chip" wx:for="{{detail.words}}" wx:key="*this">{{item}}</text>
+        </view>
+        <view class="detail-close" bindtap="closeDetail"><text>关闭</text></view>
+      </view>
+    </view>
+  </block>
+
+  <!-- ============ 卡片模式 ============ -->
+  <block wx:if="{{mode === 'card'}}">
+    <view class="card-stage">
+      <view class="flip-card" bindtap="onCardTap">
+        <view class="flip-inner {{flipped ? 'flipped' : ''}}">
+          <view class="flip-front">
+            <text class="flip-char">{{cardChar}}</text>
+            <text class="flip-hint">点击翻看拼音</text>
+          </view>
+          <view class="flip-back">
+            <text class="flip-pinyin">{{cardPinyin}}</text>
+            <text class="flip-meaning">{{cardMeaning}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="card-progress">{{cardIndex + 1}} / {{cardTotal}}</view>
+    <view class="card-actions">
+      <view class="cap-btn" bindtap="onCardPrev"><text>上一张</text></view>
+      <view class="cap-btn cap-primary" bindtap="onCardRandom"><text>随机</text></view>
+      <view class="cap-btn" bindtap="onCardNext"><text>下一张</text></view>
+    </view>
+    <view class="safe-bottom"></view>
+  </block>
+
+  <!-- ============ 测验模式 ============ -->
+  <block wx:if="{{mode === 'quiz'}}">
+    <view class="quiz-head">
+      <text class="quiz-score">得分 {{quizScore}}</text>
+      <text class="quiz-progress">{{quizDone + 1}} / {{quizTotal}}</text>
+    </view>
+
+    <view class="quiz-stage">
+      <text class="quiz-char">{{quizCurrent.char}}</text>
+      <text class="quiz-tip">请选出正确的拼音</text>
+    </view>
+
+    <view class="quiz-options">
+      <view
+        class="quiz-opt {{quizAnswered && item.correct ? 'opt-correct' : ''}} {{quizAnswered && index === quizSelected && !item.correct ? 'opt-wrong' : ''}}"
+        wx:for="{{quizOptions}}"
+        wx:key="text"
+        data-index="{{index}}"
+        bindtap="onQuizOption"
+      >
+        <text class="quiz-opt-text">{{item.text}}</text>
+      </view>
+    </view>
+
+    <view wx:if="{{quizAnswered}}" class="quiz-feedback">
+      <text class="quiz-feedback-text {{quizSelectedCorrect ? 'fb-ok' : 'fb-no'}}">
+        {{quizSelectedCorrect ? '回答正确！' : '正确答案：' + quizCurrent.pinyin}}
+      </text>
+      <text class="quiz-msg {{quizMsgShow ? 'show' : ''}} {{quizSelectedCorrect ? 'fb-ok' : 'fb-no'}}">{{quizMsg}}</text>
+      <view class="quiz-next" bindtap="nextQuiz"><text>{{quizDone + 1 >= quizTotal ? '完成' : '下一题'}}</text></view>
+    </view>
+    <view class="safe-bottom"></view>
+  </block>
+</view>

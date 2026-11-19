@@ -1,0 +1,22 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/countdown/countdown",
+    "pages/add/add",
+    "pages/poetry/poetry",
+    "pages/hanzi/hanzi",
+    "pages/puzzle/puzzle",
+    "pages/salary/salary"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#FF6B35",
+    "navigationBarTitleText": "百宝箱",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F8F6F3",
+    "backgroundTextStyle": "dark",
+    "enablePullDownRefresh": false
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

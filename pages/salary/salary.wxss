@@ -1,0 +1,253 @@
+.page {
+  min-height: 100vh;
+  background: var(--bg-page);
+  padding: 0 32rpx 60rpx;
+}
+
+/* 顶部工具条 */
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 8rpx 28rpx;
+}
+
+.app-name {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.setting-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8rpx;
+  padding: 12rpx 26rpx;
+  background: var(--bg-card);
+  border-radius: 999rpx;
+  border: 1rpx solid rgba(0, 0, 0, 0.05);
+}
+
+.setting-icon {
+  font-size: 26rpx;
+  line-height: 1;
+}
+
+.setting-text {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+}
+
+/* 主面板 */
+.panel {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1rpx solid rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.block {
+  padding: 32rpx;
+}
+
+.block + .block {
+  border-top: 1rpx solid rgba(0, 0, 0, 0.07);
+}
+
+/* 时间与状态 */
+.datetime {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+}
+
+.status {
+  display: block;
+  font-size: 52rpx;
+  font-weight: 700;
+  color: var(--color-info);
+  margin-top: 20rpx;
+}
+
+.status-desc {
+  display: block;
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  margin-top: 12rpx;
+}
+
+/* 金额 */
+.label {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+}
+
+.amount {
+  display: block;
+  font-size: 72rpx;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1.1;
+  margin-top: 12rpx;
+}
+
+.speed {
+  display: block;
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  margin-top: 16rpx;
+}
+
+.reference {
+  display: block;
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  margin-top: 14rpx;
+}
+
+/* 按钮 */
+.btn-dark {
+  height: 88rpx;
+  margin-top: 32rpx;
+  border-radius: 16rpx;
+  background: #2D2D2D;
+  color: #FFFFFF;
+  font-size: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 进度 */
+.progress-row {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.progress-percent {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-info);
+}
+
+.progress-track {
+  height: 12rpx;
+  margin: 20rpx 0 16rpx;
+  background: #ECEDEF;
+  border-radius: 6rpx;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--color-info);
+  border-radius: 6rpx;
+}
+
+.work-time {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+}
+
+/* 未配置引导 */
+.empty {
+  padding: 96rpx 32rpx;
+  text-align: center;
+}
+
+.empty-title {
+  display: block;
+  font-size: 34rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.empty-desc {
+  display: block;
+  font-size: 26rpx;
+  color: var(--text-hint);
+  margin-top: 16rpx;
+  line-height: 1.6;
+}
+
+/* 设置面板 */
+.mask {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 10;
+}
+
+.setting-panel {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 11;
+  background: #FFFFFF;
+  border-radius: 32rpx 32rpx 0 0;
+  padding: 40rpx 32rpx calc(40rpx + env(safe-area-inset-bottom));
+}
+
+.setting-title {
+  display: block;
+  font-size: 34rpx;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8rpx;
+}
+
+.field {
+  margin-top: 28rpx;
+}
+
+.field-label {
+  display: block;
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  margin-bottom: 12rpx;
+}
+
+.field-input {
+  height: 88rpx;
+  padding: 0 24rpx;
+  background: #F4F5F7;
+  border-radius: 14rpx;
+  font-size: 30rpx;
+  color: var(--text-primary);
+}
+
+.field-picker {
+  height: 88rpx;
+  padding: 0 24rpx;
+  background: #F4F5F7;
+  border-radius: 14rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.field-picker-text {
+  font-size: 30rpx;
+  color: var(--text-primary);
+}
+
+.field-picker-arrow {
+  font-size: 36rpx;
+  color: #CCCCCC;
+}
+
+.field-hint {
+  display: block;
+  font-size: 24rpx;
+  color: var(--text-hint);
+  margin-top: 28rpx;
+  line-height: 1.6;
+}

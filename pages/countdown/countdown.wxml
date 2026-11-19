@@ -1,0 +1,77 @@
+<view class="page">
+  <!-- Tab 切换 -->
+  <view class="tabs">
+    <view
+      class="tab-item {{activeTab === 0 ? 'tab-active' : ''}}"
+      data-index="0"
+      bindtap="onTabChange"
+    >
+      <text class="tab-text">全部</text>
+      <view class="tab-line" wx:if="{{activeTab === 0}}"></view>
+    </view>
+    <view
+      class="tab-item {{activeTab === 1 ? 'tab-active' : ''}}"
+      data-index="1"
+      bindtap="onTabChange"
+    >
+      <text class="tab-text">节日</text>
+      <view class="tab-line" wx:if="{{activeTab === 1}}"></view>
+    </view>
+    <view
+      class="tab-item {{activeTab === 2 ? 'tab-active' : ''}}"
+      data-index="2"
+      bindtap="onTabChange"
+    >
+      <text class="tab-text">我的</text>
+      <view class="tab-line" wx:if="{{activeTab === 2}}"></view>
+    </view>
+  </view>
+
+  <!-- 倒计时列表 -->
+  <view class="list-container">
+    <block wx:if="{{activeTab === 0}}">
+      <countdown-card
+        wx:for="{{list}}"
+        wx:key="name"
+        item="{{item}}"
+        bind:delete="onDelete"
+        bind:pin="onPin"
+        bind:subscribe="onSubscribe"
+      />
+    </block>
+    <block wx:if="{{activeTab === 1}}">
+      <countdown-card
+        wx:for="{{presetList}}"
+        wx:key="name"
+        item="{{item}}"
+        bind:delete="onDelete"
+        bind:pin="onPin"
+        bind:subscribe="onSubscribe"
+      />
+    </block>
+    <block wx:if="{{activeTab === 2}}">
+      <block wx:if="{{customList.length > 0}}">
+        <countdown-card
+          wx:for="{{customList}}"
+          wx:key="id"
+          item="{{item}}"
+          bind:delete="onDelete"
+          bind:pin="onPin"
+          bind:subscribe="onSubscribe"
+        />
+      </block>
+      <block wx:else>
+        <view class="empty-state">
+          <text class="empty-icon">📝</text>
+          <text class="empty-text">还没有自定义倒计时</text>
+          <view class="empty-btn" bindtap="onAdd">
+            <text class="empty-btn-text">添加一个吧</text>
+          </view>
+        </view>
+      </block>
+    </block>
+  </view>
+
+  <!-- 底部悬浮添加按钮 -->
+  <view class="fab-btn" bindtap="onAdd">+</view>
+</view>

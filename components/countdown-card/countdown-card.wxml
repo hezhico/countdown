@@ -1,0 +1,61 @@
+<view class="card-wrapper">
+  <view 
+    class="card {{item.isPast ? 'card-past' : ''}} {{item.isToday ? 'card-today' : ''}} {{item.pinned ? 'card-pinned' : ''}}"
+    style="transform: translateX({{translateX}}rpx); transition: transform 0.2s ease;"
+    bindtouchstart="onTouchStart"
+    bindtouchmove="onTouchMove"
+    bindtouchend="onTouchEnd"
+    bindtap="onTap"
+    bindlongpress="onLongPress"
+  >
+    <!-- 左侧色条 -->
+    <view class="card-bar" style="background: {{item.color || '#FF6B35'}};"></view>
+    
+    <!-- 主内容 -->
+    <view class="card-body">
+      <!-- 左侧信息 -->
+      <view class="card-info">
+        <view class="card-header">
+          <text class="card-icon">{{item.icon}}</text>
+          <text class="card-name">{{item.name}}</text>
+          <view class="pin-badge" wx:if="{{item.pinned}}">
+            <text class="pin-badge-text">置顶</text>
+          </view>
+          <view class="tag-badge tag-yearly" wx:if="{{item.repeat === 'yearly'}}">
+            <text class="tag-badge-text">每年</text>
+          </view>
+          <view class="tag-badge tag-lunar" wx:if="{{item.isLunar}}">
+            <text class="tag-badge-text">农历</text>
+          </view>
+          <view class="subscribe-icon {{item.subscribed ? 'subscribe-active' : ''}}" bindtap="onSubscribeTap">
+            <text class="subscribe-icon-text">{{item.subscribed ? '🔔' : '🔕'}}</text>
+          </view>
+        </view>
+        <view class="card-date">
+          <text class="date-text">{{item.dateStr}}</text>
+          <text class="week-text">{{item.weekDay}}</text>
+        </view>
+      </view>
+      
+      <!-- 右侧天数 -->
+      <view class="card-days">
+        <block wx:if="{{item.isToday}}">
+          <text class="days-today">就是今天！</text>
+        </block>
+        <block wx:elif="{{item.isPast}}">
+          <text class="days-num days-num-past">{{item.daysStr}}</text>
+          <text class="days-label days-label-past">天前</text>
+        </block>
+        <block wx:else>
+          <text class="days-num">{{item.daysStr}}</text>
+          <text class="days-label">天后</text>
+        </block>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 删除按钮 -->
+  <view class="delete-btn" wx:if="{{showDelete && !item.isPreset}}" bindtap="onDelete">
+    <text class="delete-text">删除</text>
+  </view>
+</view>
